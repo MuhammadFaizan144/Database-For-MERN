@@ -1,6 +1,4 @@
 const path=require('path')
-const Homecontroller =require('./controllers/error')
-const db=require("./utils/databaseUtil")
 const rootDir=require('./utils/pathutils')
 const express=require('express')
 const app=express()
@@ -12,13 +10,9 @@ app.set('views', path.join(rootDir, 'views')); // Correct key is 'views' new ver
 const storeRouter=require('./routes/storeRouter')//Export Router
 const hostrouter=require('./routes/Hostrouter')//Export Router
 const { error } = require('console')
-db.execute('SELECT * FROM homes')
-.then(([rows,fields])=>{
-  console.log('Getting from DB',rows)
-})
-.catch(error=>{
-  console.log('Error while reading home records',error)
-})
+const Homecontroller =require('./controllers/error')
+
+//Database
 
 app.use((req,res,next)=>{
   console.log(req.url,req.method)

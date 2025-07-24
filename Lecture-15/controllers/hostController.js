@@ -31,14 +31,13 @@ exports.getEditHome = (req, res, next) => {
 };
 
 exports.getHostHomes = (req, res, next) => {
-  Home.fetchAll(
-    (registeredHomes) =>
+  Home.fetchAll().then(([registeredHomes])=>{
       res.render("host/host-home-list", {
         registeredHomes: registeredHomes,
         pageTitle: "Host Home List",
         currentPage: "host-homes",
       }) //Important to change in partial
-  );
+  });
 };
 
 //Editing home
