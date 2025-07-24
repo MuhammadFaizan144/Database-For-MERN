@@ -64,17 +64,18 @@ exports.postRemoveFromFavourite = (req, res, next) => {
 
 
 exports.getHomeDetails = (req, res, next) => {//Adding module
-  const homeId=req.params.homeId;//to directly used all variable
-  Home.findById(homeId,home=>{//
-    if(!home){
-      console.log("home not found")
-      return res.redirect("/homes")
-    }else{
+   const homeId = req.params.homeId;
+  Home.findById(homeId).then(([homes]) => {
+    const home = homes[0];
+    if (!home) {
+      console.log("Home not found");
+      res.redirect("/homes");
+    } else {
       res.render("store/home-detail", {
-        home:home,
-      pageTitle: "Home Detail",
-      currentPage: "Home",
-      }) 
+        home: home,
+        pageTitle: "Home Detail",
+        currentPage: "Home",
+      });
     }
     })
 };
