@@ -17,7 +17,13 @@ module.exports = class Home {
   //To save Files
   save() {
     //Write File
-    return db.execute('INSERT INTO homes (houseName, price, location, rating, photoUrl, description) VALUES (?, ?, ?, ?, ?, ?)', [this.houseName, this.price, this.location, this.rating, this.photoURL, this.description])
+    if (this.id) { // update
+      return db.execute('UPDATE homes SET houseName=?, price=?, location=?, rating=?, photoUrl=?, description=? WHERE id=?', [this.houseName, this.price, this.location, this.rating, this.photoURL, this.description, this.id]);
+
+    } else { // insert
+      return db.execute('INSERT INTO homes (houseName, price, location, rating, photoUrl, description) VALUES (?, ?, ?, ?, ?, ?)', [this.houseName, this.price, this.location, this.rating, this.photoURL, this.description]);
+    }
+
     
   }
 

@@ -12,21 +12,23 @@ exports.getAddhome = (req, res, next) => {
 };
 
 exports.getEditHome = (req, res, next) => {
-  const homeId = req.params.homeId;
-  const editing = req.query.editing === "true";
+    const homeId = req.params.homeId;
+  const editing = req.query.editing === 'true';
 
-  Home.findById(homeId,home=>{//14 part 2
-    if(!home){
-      console.log("Home not found for editing")
-      return res.redirect("/host/host-home-list")
+  Home.findById(homeId).then(([homes]) => {
+    const home = homes[0];
+    if (!home) {
+      console.log("Home not found for editing.");
+      return res.redirect("/host/host-home-list");
     }
-    console.log(homeId, editing,home);
+
+    console.log(homeId, editing, home);
     res.render("host/edit-home", {
-      home:home,
+      home: home,
       pageTitle: "Edit your Home",
-      currentPage: "host-home",
-      editing:editing,
-  })
+      currentPage: "host-homes",
+      editing: editing,
+    });
   });
 };
 
@@ -55,7 +57,7 @@ exports.postEditHome = (req, res, next) => {
 
   const {id, houseName, price, location, rating, photoURL,description } = req.body;
   const home = new Home(houseName, price, location, rating, photoURL,description,id); //Adding Module
-  // home.id=id
+  
 
   home.save();
 
