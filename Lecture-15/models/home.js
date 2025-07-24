@@ -5,17 +5,19 @@ const db=require("../utils/databaseUtil")
 
 
 module.exports = class Home {
-  constructor(houseName, price, location, rating, photoURL) {
+  constructor(houseName, price, location, rating, photoURL,description,id) {
     this.houseName = houseName;
     this.price = price;
     this.location = location;
     this.rating = rating;
     this.photoURL = photoURL;
+    this.description=description
+    this.id=id;
   }
   //To save Files
   save() {
     //Write File
-
+    return db.execute('INSERT INTO homes (houseName, price, location, rating, photoUrl, description) VALUES (?, ?, ?, ?, ?, ?)', [this.houseName, this.price, this.location, this.rating, this.photoURL, this.description])
     
   }
 

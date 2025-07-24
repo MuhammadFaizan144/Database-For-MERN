@@ -44,18 +44,18 @@ exports.getHostHomes = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
   console.log(req.body); //parcel
 
-  const { houseName, price, location, rating, photoURL } = req.body;
-  const home = new Home(houseName, price, location, rating, photoURL); //Adding Module
-  home.save();
+  const { houseName, price, location, rating, photoURL,description } = req.body;
+  const home = new Home(houseName, price, location, rating, photoURL,description); //Adding Module
+  home.save()
   res.redirect("/host/host-home-list");
 };
 
 exports.postEditHome = (req, res, next) => {
   console.log(req.body); //parcel
 
-  const {id, houseName, price, location, rating, photoURL } = req.body;
-  const home = new Home(houseName, price, location, rating, photoURL); //Adding Module
-  home.id=id
+  const {id, houseName, price, location, rating, photoURL,description } = req.body;
+  const home = new Home(houseName, price, location, rating, photoURL,description,id); //Adding Module
+  // home.id=id
 
   home.save();
 
