@@ -1,8 +1,8 @@
-const mysql=require('mysql12');
+const mysql=require('mysql2');
 const pool=mysql.createPool({
   host:'localhost',
   user:'root',
-  password:'Completecoding@01',
+  password:'faizanfk0309',
   database:'airbnb'
 })
 module.exports=pool.promise();
