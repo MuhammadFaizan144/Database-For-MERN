@@ -31,7 +31,7 @@ exports.getBookings=(req, res, next) => {
 exports.getFavouriteList=(req, res, next) => {
    Favourite.getFavourites(favourites => {
     Home.fetchAll().then(([registeredHomes])=>{
-      const favouriteHomes = registeredHomes.filter(home => favourites.includes(home.id));
+      const favouriteHomes = registeredHomes.filter(home => favourites.includes(home._id));
       res.render("store/favourite-list", {
         favouriteHomes: favouriteHomes,
         pageTitle: "My Favourites",
