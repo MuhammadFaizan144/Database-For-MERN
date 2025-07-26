@@ -48,7 +48,9 @@ exports.postAddHome = (req, res, next) => {
 
   const { houseName, price, location, rating, photoURL,description } = req.body;
   const home = new Home(houseName, price, location, rating, photoURL,description); //Adding Module
-  home.save()
+  home.save().then(()=>{
+    console.log('Home Saved succesfully')
+  })
   res.redirect("/host/host-home-list");
 };
 

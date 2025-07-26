@@ -17,7 +17,10 @@ module.exports = class Home {
   }
   //To save Files
   save() {
-
+    const db=getdb()
+    return db.collection("homes").insertOne(this).then((result)=>{
+      console.log(result)
+    })
     
   }
 
