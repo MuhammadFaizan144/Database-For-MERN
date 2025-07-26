@@ -61,7 +61,9 @@ exports.postEditHome = (req, res, next) => {
   const home = new Home(houseName, price, location, rating, photoURL,description,id); //Adding Module
   
 
-  home.save();
+  home.save().then(result=>{
+    console.log('Home updated',result)
+  });
 
   res.redirect("/host/host-home-list");
 };

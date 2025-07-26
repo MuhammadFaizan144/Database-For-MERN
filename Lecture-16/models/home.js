@@ -21,7 +21,19 @@ module.exports = class Home {
   //To save Files
   save() {
     const db=getdb()
-    return db.collection("homes").insertOne(this)
+      const updateFields = {
+        houseName: this.houseName,
+        price: this.price,
+        location: this.location,
+        rating: this.rating,
+        photoURL: this.photoURL,
+        description: this.description
+      };
+    if(this._id){
+      return db.collection('homes').updateOne({_id: new ObjectId(String(this._id))}, {$set: updateFields});
+    } else { // insert
+      return db.collection('homes').insertOne(this);
+    }
   }
 
   //Read File
@@ -35,5 +47,7 @@ module.exports = class Home {
   }
   
   static deleteById(homeId) {
-  }
+    const db =getdb()
+    return db.collection('homes').deleteOne({_id: new ObjectId(String(homeId)) })
+  } 
 };
