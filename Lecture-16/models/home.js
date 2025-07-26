@@ -18,16 +18,14 @@ module.exports = class Home {
   //To save Files
   save() {
     const db=getdb()
-    return db.collection("homes").insertOne(this).then((result)=>{
-      console.log(result)
-    })
-    
+    return db.collection("homes").insertOne(this)
   }
 
   //Read File
   static fetchAll() {
-
-   }
+    const db =getdb()
+    return db.collection('homes').find().toArray()
+  }
   static findById(homeId) {
   }
   
