@@ -11,7 +11,7 @@ const storeRouter=require('./routes/storeRouter')//Export Router
 const hostrouter=require('./routes/Hostrouter')//Export Router
 const { error } = require('console')
 const Homecontroller =require('./controllers/error');
-const mongoConnect = require('./utils/databaseUtil');
+const {mongoConnect} = require('./utils/databaseUtil');
 
 //Database
 
@@ -28,8 +28,7 @@ app.use(express.static(path.join(rootDir,'public')))//To access css file
 app.use(Homecontroller.page404)
 
 const PORT=3002
-mongoConnect(client=>{
-  console.log(client)
+mongoConnect(()=>{
   app.listen(PORT,()=>{
     console.log(`Server is running on port http://localhost:${PORT}`)
   })
