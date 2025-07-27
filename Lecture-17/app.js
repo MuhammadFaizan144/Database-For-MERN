@@ -12,6 +12,7 @@ const hostrouter=require('./routes/Hostrouter')//Export Router
 const { error } = require('console')
 const Homecontroller =require('./controllers/error');
 const {mongoConnect} = require('./utils/databaseUtil');
+const { default: mongoose } = require('mongoose');
 
 //Database
 
@@ -28,8 +29,12 @@ app.use(express.static(path.join(rootDir,'public')))//To access css file
 app.use(Homecontroller.page404)
 
 const PORT=3002
-mongoConnect(()=>{
+const DB_PATH="mongodb+srv://fg7829098:faizanfk0309@cluster01.erroaal.mongodb.net/airbnb?retryWrites=true&w=majority&appName=Cluster01"
+mongoose.connect(DB_PATH).then(()=>{
+  console.log('Connected to mongoose')
   app.listen(PORT,()=>{
     console.log(`Server is running on port http://localhost:${PORT}`)
   })
+}).catch((err)=>{
+  console.log("Error",err)
 })
