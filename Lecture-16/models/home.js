@@ -37,7 +37,7 @@ module.exports = class Home {
   }
 
   //Read File
-  static fetchAll() {
+  static find() {
     const db =getdb()
     return db.collection('homes').find().toArray()
   }

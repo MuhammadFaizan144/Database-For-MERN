@@ -33,7 +33,7 @@ exports.getEditHome = (req, res, next) => {
 };
 
 exports.getHostHomes = (req, res, next) => {
-  Home.fetchAll().then(registeredHomes=>{
+  Home.find().then(registeredHomes=>{ //Use find instead of fetchAll in mongoose
       res.render("host/host-home-list", {
         registeredHomes: registeredHomes,
         pageTitle: "Host Home List",
@@ -47,7 +47,7 @@ exports.postAddHome = (req, res, next) => {
   console.log(req.body); //parcel
 
   const { houseName, price, location, rating, photoURL,description } = req.body;
-  const home = new Home(houseName, price, location, rating, photoURL,description); //Adding Module
+  const home = new Home({houseName, price, location, rating, photoURL,description}); //Adding Module
   home.save().then(()=>{
     console.log('Home Saved succesfully')
   })

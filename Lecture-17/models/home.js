@@ -15,3 +15,4 @@ const homeSchema=mongoose.Schema({
   photoURL:String,
   description:String,
 })
+module.exports=mongoose.model('Home',homeSchema)

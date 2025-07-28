@@ -28,7 +28,7 @@ module.exports = class Home {
   }
 
   //Read File
-  static fetchAll() {
+  static find() {
     return db.execute('SELECT * FROM homes')
     
 // .then(([rows,fields])=>{

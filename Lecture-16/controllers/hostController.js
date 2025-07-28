@@ -33,7 +33,7 @@ exports.getEditHome = (req, res, next) => {
 };
 
 exports.getHostHomes = (req, res, next) => {
-  Home.fetchAll().then(registeredHomes=>{
+  Home.find().then(registeredHomes=>{
       res.render("host/host-home-list", {
         registeredHomes: registeredHomes,
         pageTitle: "Host Home List",
