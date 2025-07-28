@@ -58,20 +58,29 @@ exports.postEditHome = (req, res, next) => {
   console.log(req.body); //parcel
 
   const {id, houseName, price, location, rating, photoURL,description } = req.body;
-  const home = new Home(houseName, price, location, rating, photoURL,description,id); //Adding Module
-  
-
-  home.save().then(result=>{
-    console.log('Home updated',result)
-  });
-
-  res.redirect("/host/host-home-list");
+  Home.findById(id).then((home)=>{
+    home.houseName=houseName;
+    home.price=price;
+    home.location=location;
+    home.rating=rating;
+    home.photoURL=photoURL;
+    home.description=description;
+    home.save().then(result=>{
+      console.log('Home updated',result)
+    }).catch(err=>{
+      console.log("Error while updating",err)
+    })
+    res.redirect("/host/host-home-list");
+  }).catch(err=>{
+    console.log("Error while finding home",err)
+  })
 };
+
 //delete
 exports.postDeleteHome = (req, res, next) => {
   const homeId = req.params.homeId;
   console.log('Came to delete ', homeId);
-  Home.deleteById(homeId).then(() => {
+  Home.findByIdAndDelete(homeId).then(() => {
     res.redirect("/host/host-home-list");
   }).catch(error => {
     console.log('Error while deleting ', error);
