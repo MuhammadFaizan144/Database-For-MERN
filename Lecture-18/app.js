@@ -9,6 +9,7 @@ app.set('views', path.join(rootDir, 'views')); // Correct key is 'views' new ver
 
 const storeRouter=require('./routes/storeRouter')//Export Router
 const hostrouter=require('./routes/Hostrouter')//Export Router
+const authRouter=require('./routes/authRouter')
 const { error } = require('console')
 const Homecontroller =require('./controllers/error');
 const {mongoConnect} = require('./utils/databaseUtil');
@@ -23,6 +24,7 @@ app.use((req,res,next)=>{
 
 app.use(express.urlencoded())//parcel
 app.use(storeRouter)//Export Router
+app.use(authRouter)//auth router
 app.use("/host",hostrouter)//Export Router /host for overall path sharing
 app.use(express.static(path.join(rootDir,'public')))//To access css file
 
