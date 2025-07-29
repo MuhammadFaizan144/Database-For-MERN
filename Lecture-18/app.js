@@ -25,6 +25,13 @@ app.use((req,res,next)=>{
 app.use(express.urlencoded())//parcel
 app.use(storeRouter)//Export Router
 app.use(authRouter)//auth router
+app.use("/host",(req,res,next)=>{//to prevent access page by url without login
+  if(req.isLoggedIn){
+    next()
+  }else{
+    res.redirect("/login")
+  }
+})
 app.use("/host",hostrouter)//Export Router /host for overall path sharing
 app.use(express.static(path.join(rootDir,'public')))//To access css file
 
