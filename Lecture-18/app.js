@@ -2,6 +2,9 @@ const path = require("path");
 const rootDir = require("./utils/pathutils");
 const express = require("express");
 const app = express();
+//session
+const session=require("express-session")
+const MongoDBStore=require('connect-mongodb-session')(session)
 //ejs
 
 const DB_PATH =
@@ -10,21 +13,31 @@ const DB_PATH =
 const storeRouter = require("./routes/storeRouter"); //Export Router
 const hostrouter = require("./routes/Hostrouter"); //Export Router
 const authRouter = require("./routes/authRouter");
-const { error } = require("console");
+// const { error } = require("console");
 const Homecontroller = require("./controllers/error");
-const { mongoConnect } = require("./utils/databaseUtil");
+// const { mongoConnect } = require("./utils/databaseUtil");
 const { default: mongoose } = require("mongoose");
 app.set("view engine", "ejs"); // Tells Express to use EJS templates
 app.set("views", path.join(rootDir, "views")); // Correct key is 'views' new version key
 
 app.use(express.urlencoded()); //parcel
+//session
+const store=new MongoDBStore({//to store session in mongodb
+  uri:DB_PATH,
+  collection:'session'
+})
+app.use(session({
+  secret:"KnowledgeGate AI with Complete Coding",
+  resave:false,
+  saveUninitialized:true,
+  store
+
+}))
 //cookie
 app.use((req, res, next) => {
-    req.isLoggedIn = req.get('Cookie') 
-    ? req.get('Cookie').split('=')[1] === 'true' 
-    : false;
+    req.isLoggedIn = req.session.isLoggedIn
 
-  next();
+  next()
 });
 
 app.use(authRouter); //auth router

@@ -2,6 +2,7 @@ const Favourite = require("../models/favourite");
 const Home = require("../models/home"); //Adding Module
 
 exports.getIndex = (req, res, next) => {//Adding module
+  console.log("Session Value:", req.session)
   Home.find().then(registeredHomes=>{
     res.render("store/index", {
       registeredHomes: registeredHomes,
