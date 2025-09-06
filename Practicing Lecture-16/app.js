@@ -22,8 +22,7 @@ app.use("/host",hostRouter)
 app.use(get404.getError)
 
 const POST=3000
-mongoConnect(client=>{
-  console.log(client)
+mongoConnect(()=>{
   app.listen(POST,()=>{
     console.log(`Server link http://localhost:${POST}` )
   })
