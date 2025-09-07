@@ -28,7 +28,7 @@
                   <span class="text-gray-700"><%= home.rating || 'N/A' %></span>
                 </div>
               </div>
-              <a class="bg-green-300 p-2" href="/Homes/<%= home.id %>">Details</a>
+              <a class="bg-green-300 p-2" href="/Homes/<%= home._id %>">Details</a>
                     <%- include("../partials/favourite.ejs",{home:home}) %>
             </div>
           </div>

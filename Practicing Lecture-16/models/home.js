@@ -1,28 +1,36 @@
-const { getDB } = require("../utils/databaseUtil")
-
-module.exports=class Home{
-  constructor(houseName,price,location,rating,photoURL){
-    this.houseName=houseName
-    this.price=price
-    this.location=location
-    this.rating=rating
-    this.photoURL=photoURL
+const { ObjectId } = require("mongodb");
+const { getDB } = require("../utils/databaseUtil");
+// const { ObjectId } = require("mongodb");
+module.exports = class Home {
+  constructor(houseName, price, location, rating, photoURL, _id) {
+    this.houseName = houseName;
+    this.price = price;
+    this.location = location;
+    this.rating = rating;
+    this.photoURL = photoURL;
+    if (_id) {
+      this._id = _id;
+    }
   }
 
-  save(){
-    const db=getDB();
-    return db.collection("homes").insertOne(this).then((result)=>{
-      console.log(result)
-    })
+  save() {
+    const db = getDB();
+    return db
+      .collection("homes")
+      .insertOne(this)
+      .then((result) => {
+        console.log(result);
+      });
   }
-  static fetchAll(callback){
-    const db=getDB()
+  static fetchAll() {
+    const db = getDB();
     return db.collection("homes").find().toArray();
   }
-  static findById(homeId,callback){
-    
+  static findById(homeId) {
+    console.log(homeId);
+    const db = getDB;
+    return db.collection("homes")
+    .find({ _id: new ObjectId(String(homeId)) }).next();
   }
-  static deleteById(homeId,callback){
-    
-  }
-}
+  static deleteById(homeId, callback) {}
+};
