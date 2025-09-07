@@ -19,4 +19,4 @@ const getDB=()=>{
   return _db
 }
 exports.getDB=getDB
-module.exports=mongoConnect
+exports.mongoConnect=mongoConnect

@@ -5,7 +5,7 @@ const rootDir=require("./utils/utilspath")
 const storeRouter=require("./routes/storeRouter")
 const {hostRouter}=require("./routes/hostRouter")
 const get404=require("./controllers/error")
-const mongoConnect = require('./utils/databaseUtil')
+const {mongoConnect} = require('./utils/databaseUtil')
 
 app.set("view engine","ejs")
 app.set("views","views")

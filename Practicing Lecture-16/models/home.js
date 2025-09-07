@@ -1,3 +1,4 @@
+const { getDB } = require("../utils/databaseUtil")
 
 module.exports=class Home{
   constructor(houseName,price,location,rating,photoURL){
@@ -9,7 +10,10 @@ module.exports=class Home{
   }
 
   save(){
-    
+    const db=getDB();
+    return db.collection("homes").insertOne(this).then((result)=>{
+      console.log(result)
+    })
   }
   static fetchAll(callback){
     
