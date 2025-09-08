@@ -14,13 +14,26 @@ module.exports = class Home {
   }
 
   save() {
+    const UpdateField={
+      houseName:this.houseName,
+      price:this.price,
+      location:this.location,
+      rating:this.rating,
+      photoURL:this.photoURL,
+    }
     const db = getDB();
-    return db
-      .collection("homes")
-      .insertOne(this)
-      .then((result) => {
-        console.log(result);
-      });
+    if(this._id){
+      return db.collection("homes").updateOne({_id:new ObjectId(String(this._id))},
+    {$set:UpdateField})
+    }else{
+      return db
+        .collection("homes")
+        .insertOne(this)
+        .then((result) => {
+          console.log(result);
+        });
+
+    }
   }
   static fetchAll() {
     const db = getDB();

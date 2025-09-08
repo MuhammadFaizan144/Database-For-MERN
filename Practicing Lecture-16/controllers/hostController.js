@@ -38,7 +38,9 @@ exports.postEditHome=(req,res,next)=>{
   const{id,houseName,location,rating,price,photoURL}=req.body
   const home=new Home(houseName,price,location,rating,photoURL)
   home._id=id
-  home.save()
+  home.save().then(result=>{
+    console.log('Home result: ',result)
+  })
   res.redirect("/host/host-home-list")
 }
 
