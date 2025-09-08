@@ -28,7 +28,7 @@ module.exports = class Home {
   }
   static findById(homeId) {
     console.log(homeId);
-    const db = getDB;
+    const db = getDB();
     return db.collection("homes")
     .find({ _id: new ObjectId(String(homeId)) }).next();
   }
