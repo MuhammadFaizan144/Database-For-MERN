@@ -32,5 +32,9 @@ module.exports = class Home {
     return db.collection("homes")
     .find({ _id: new ObjectId(String(homeId)) }).next();
   }
-  static deleteById(homeId, callback) {}
+  static deleteById(homeId, callback) {
+    const db=getDB()
+    return db.collection("homes")
+    .deleteOne({_id:new ObjectId(String(homeId))})
+  }
 };
