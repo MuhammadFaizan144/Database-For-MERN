@@ -26,10 +26,13 @@ exports.getBooking = (req, res, next) => {
   });
 };
 exports.getFavouriteList = (req, res, next) => {
-  Favourite.getFavourite((favourite) => {
+  Favourite.getFavourite().then(favourite => {
+    favourite=favourite.map(fav=>fav.houseId)
+
     Home.fetchAll().then(registeredHome => {
+      console.log(favourite,registeredHome)
       const favouriteHomes = registeredHome.filter(home =>
-        favourite.includes(home._id)
+        favourite.includes(home._id.toString())
       );
       res.render("store/favourite-list", {
         favouriteHomes: favouriteHomes,
@@ -41,12 +44,15 @@ exports.getFavouriteList = (req, res, next) => {
 };
 
 exports.postAddToFavourite = (req, res, next) => {
-  Favourite.addToFavourite(req.body.id, (error) => {
-    if (error) {
-      console.log("Error while marking favourite", error);
-    }
+  const houseId=req.body.id
+  const fav=new Favourite(houseId)
+  fav.save().then(result=>{
+    console.log("Fav added", result)
+  }).catch(err=>{
+    console.log("Error in adding fav",err)
+  }).finally(()=>{
     res.redirect("/favourite");
-  });
+  })
 };
 
 exports.getHomeDetails = (req, res, next) => {
