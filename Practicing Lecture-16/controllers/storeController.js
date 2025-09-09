@@ -73,10 +73,11 @@ exports.getHomeDetails = (req, res, next) => {
 };
 exports.postDeleteFavourite=(req,res,next)=>{
   const homeId=req.params.homeId
-  Favourite.deleteById(homeId,error=>{
-    if(error){
-      console.log("Error while removing favourite",error)
-    }
+  Favourite.deleteById(homeId).then(result=>{
+    console.log('Fav Removed: ',result)
+  }).catch(err=>{
+    console.log("err",err)
+  }).finally(()=>{  
     res.redirect("/favourite")
   })
 }
