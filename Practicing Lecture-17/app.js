@@ -1,26 +1,35 @@
+const path=require('path')
+const rootDir=require('./utils/pathutils')
 const express=require('express')
 const app=express()
-const path=require("path")
-const rootDir=require("./utils/utilspath")
-const storeRouter=require("./routes/storeRouter")
-const {hostRouter}=require("./routes/hostRouter")
-const get404=require("./controllers/error")
+//ejs
+app.set('view engine', 'ejs'); // Tells Express to use EJS templates
+app.set('views', path.join(rootDir, 'views')); // Correct key is 'views' new version key
 
-app.set("view engine","ejs")
-app.set("views","views")
-app.use(express.static(path.join(rootDir,"public")))
 
-app.use(express.urlencoded())
+const storeRouter=require('./routes/storeRouter')//Export Router
+const hostrouter=require('./routes/Hostrouter')//Export Router
+const { error } = require('console')
+const Homecontroller =require('./controllers/error');
+const {mongoConnect} = require('./utils/databaseUtil');
+
+//Database
+// qsq
 app.use((req,res,next)=>{
-  console.log(req.url)
+  console.log(req.url,req.method)
   next()
 })
 
-app.use(storeRouter)
-app.use("/host",hostRouter)
-app.use(get404.getError)
+app.use(express.urlencoded())//parcel
+app.use(storeRouter)//Export Router
+app.use("/host",hostrouter)//Export Router /host for overall path sharing
+app.use(express.static(path.join(rootDir,'public')))//To access css file
 
-const POST=3000
-app.listen(POST,()=>{
-  console.log(`Server link http://localhost:${POST}` )
+app.use(Homecontroller.page404)
+
+const PORT=3002
+mongoConnect(()=>{
+  app.listen(PORT,()=>{
+    console.log(`Server is running on port http://localhost:${PORT}`)
+  })
 })

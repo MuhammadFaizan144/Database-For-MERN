@@ -1,14 +1,15 @@
-const express=require("express")
-const path=require("path")
-const rootDir=require("../utils/utilspath")
+
+const express=require('express')
 const storeRouter=express.Router()
 
-const storeController=require("../controllers/storeController")
+const storeController=require("../controllers/storeController")//mvc
+
 storeRouter.get("/",storeController.getIndex)
-storeRouter.get("/Homes",storeController.getHomeList)
-storeRouter.get("/bookings",storeController.getBooking)
-storeRouter.get("/favourite",storeController.getFavouriteList)
-storeRouter.post("/favourite",storeController.postAddToFavourite)
-storeRouter.get("/Homes/:homeId",storeController.getHomeDetails)
-storeRouter.post("/favourite/delete/:homeId",storeController.postDeleteFavourite)
+storeRouter.get("/homes",storeController.gethome)
+storeRouter.get("/bookings",storeController.getBookings)
+storeRouter.get("/favourites",storeController.getFavouriteList)
+storeRouter.get("/homes/:homeId",storeController.getHomeDetails)
+storeRouter.post("/favourites",storeController.postAddToFavourite)
+storeRouter.post("/favourites/delete/:homeId", storeController.postRemoveFromFavourite);
+
 module.exports=storeRouter
