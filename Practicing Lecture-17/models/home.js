@@ -1,7 +1,6 @@
 
 const { ObjectId } = require("mongodb");
 const db=require("../utils/databaseUtil")
-const {getdb} = require('../utils/databaseUtil');
 
 //Database
 
