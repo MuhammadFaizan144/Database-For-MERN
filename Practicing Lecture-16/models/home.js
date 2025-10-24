@@ -13,7 +13,10 @@ module.exports=class Home{
   }
 
   save(){
-    getDB()
+    const db=getDB()
+    return db.collection('homes').insertOne(this).then((result)=>{
+      console.log(result)
+    })
   }
   static fetchAll(){
   }

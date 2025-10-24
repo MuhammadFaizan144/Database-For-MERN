@@ -1,7 +1,4 @@
-const fs=require("fs")
-const path=require("path")
-const rootDir=require("../utils/utilspath")
-const favouritepath=path.join(rootDir,"data","favourite.json")
+
 
 module.exports=class Favourite{
   static addToFavourite(homeId,callback){

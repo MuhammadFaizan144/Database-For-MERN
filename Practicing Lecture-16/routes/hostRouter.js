@@ -1,6 +1,4 @@
 const express=require("express")
-const path=require("path")
-const rootDir=require("../utils/utilspath")
 const hostRouter=express.Router()
 const hostController=require('../controllers/hostController')
 
