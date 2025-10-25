@@ -1,3 +1,4 @@
+const { Result } = require("postcss")
 const Home = require("../models/home")
 
 exports.getAddHome = (req, res, next) => {
@@ -36,9 +37,11 @@ exports.getEditHome = (req, res, next) => {
 }
 exports.postEditHome = (req, res, next) => {
   const { id, houseName, location, rating, price, photoURL } = req.body
-  const home = new Home(houseName, price, location, rating, photoURL)
+  const home = new Home(houseName, price, location, rating, photoURL,id)
   home._id = id
-  home.save()
+  home.save().then(result=>{
+    console.log('Home updated',result)
+  })
   res.redirect("/host/host-home-list")
 }
 
