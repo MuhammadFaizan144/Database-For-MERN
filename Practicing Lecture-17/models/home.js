@@ -1,7 +1,4 @@
-
-const { error } = require("console")
 const Favourite = require("./favourite")
-const { getDB } = require('../utils/databaseUtils')
 const { ObjectId } = require('mongodb')
 
 module.exports = class Home {
