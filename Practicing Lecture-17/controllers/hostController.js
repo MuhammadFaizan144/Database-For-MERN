@@ -5,16 +5,18 @@ exports.getAddHome = (req, res, next) => {
   res.render("host/edit-home", { pageTitle: "Add Home", currentPage: "addhome", editing: false })
 }
 const registeredHome = []
+
 exports.getHomeAdd = (req, res, next) => {
   // console.log(req.body)
   const { houseName, price, location, rating, photoURL } = req.body
-  const home = new Home(houseName, price, location, rating, photoURL)
+  const home = new Home({houseName, price, location, rating, photoURL})
 
   home.save().then(() => {
     console.log("Home saved sccessfully")
   })
   res.redirect("/host/host-home-list")
 }
+
 exports.getHostHomeList = (req, res, next) => {
 
   Home.fetchAll().then(registeredHome => {
