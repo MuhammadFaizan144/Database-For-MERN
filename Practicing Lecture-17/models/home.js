@@ -7,6 +7,8 @@ const homeSchema=mongoose.Schema({
   rating:String,
   photoURL:String,
 });
+module.exports=mongoose.model('Home',homeSchema)
+
 // module.exports = class Home {
 //   constructor(houseName, price, location, rating, photoURL, _id) {
 //     this.houseName = houseName
