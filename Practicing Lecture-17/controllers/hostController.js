@@ -9,7 +9,7 @@ const registeredHome = []
 exports.getHomeAdd = (req, res, next) => {
   // console.log(req.body)
   const { houseName, price, location, rating, photoURL } = req.body
-  const home = new Home({houseName, price, location, rating, photoURL})
+  const home = new Home({ houseName, price, location, rating, photoURL })
 
   home.save().then(() => {
     console.log("Home saved sccessfully")
@@ -39,12 +39,22 @@ exports.getEditHome = (req, res, next) => {
 }
 exports.postEditHome = (req, res, next) => {
   const { id, houseName, location, rating, price, photoURL } = req.body
-  const home = new Home(houseName, price, location, rating, photoURL,id)
-  home._id = id
-  home.save().then(result=>{
-    console.log('Home updated',result)
+  Home.findById(id).then((home) => {
+    home.houseName = houseName
+    home.location = location
+    home.rating = rating
+    home.price = price
+    home.photoURL = photoURL
+    home.save().then(result => {
+      console.log('Home updated', result)
+    }).catch(err => {
+      console.log('Error', err)
+    })
+    res.redirect("/host/host-home-list")
+  }).catch(err => {
+    console.log('Error', err)
   })
-  res.redirect("/host/host-home-list")
+
 }
 
 exports.postDeleteHome = (req, res, next) => {

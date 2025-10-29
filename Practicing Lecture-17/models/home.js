@@ -19,7 +19,7 @@ module.exports=mongoose.model('home',homeSchema)
 
 //       this._id = _id
 // save() 
-// static find()
+// static fatchAll()
 // static findById(homeId)
 // static deleteById(homeId)
 
