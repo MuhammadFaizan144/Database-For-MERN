@@ -1,5 +1,6 @@
 const { ObjectId } = require('mongodb')
 const mongoose=require('mongoose')
+const favourite=require('./favourite')
 const homeSchema=mongoose.Schema({
   houseName:{type:String, required:true},
   price:{type:String, required:true},
@@ -7,6 +8,12 @@ const homeSchema=mongoose.Schema({
   rating:String,
   photoURL:String,
 });
+//to delete home if we delete it in host 
+homeSchema.pre('findOneAndDelete', async function(next){
+  console.log("Came to pre hook while deleting home")
+  const homeId=this.getQuery()._id
+  await favourite.deleteMany({houseId:homeId})
+})
 module.exports=mongoose.model('home',homeSchema)
 
 // module.exports = class Home {
