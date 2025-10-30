@@ -1,24 +1,10 @@
-
-module.exports=class Favourite{
-   constructor(houseId) {
-    this.houseId = houseId;
+const mongoose=require('mongoose')
+const favioruiteSchema=mongoose.Schema({
+  houseId:{
+    type:mongoose.Schema.Types.ObjectId,//dosre table ka dosre collection ka _id hai
+    ref:'Home',
+    required:true,
+    unique:true
   }
-  save(){
-    const db=getDB()
-    return db.collection('favourites').findOne({houseId:this.houseId}).then(existingFav=>{
-      if (!existingFav){
-        return db.collection('favourites').insertOne(this);
-      }
-      return Promise.resolve()
-    })
-  }
-  static getFavourite(){
-    const db=getDB()
-    return db.collection('favourites').find().toArray()
-  }
-
-  static deleteById(delHomeId){
-        const db = getDB()
-        return db.collection('favourites').deleteOne({ houseId:delHomeId })
-  }
-}
+})
+module.exports=mongoose.model('Favourite',favioruiteSchema)//Favourite name ka ayk module bana de jiye or
