@@ -1,4 +1,5 @@
 const Favourite = require("../models/favourite");
+const home = require("../models/home");
 const Home = require("../models/home");
 const { registeredHome } = require("./hostController");
 exports.getIndex = (req, res, next) => {
@@ -26,8 +27,8 @@ exports.getBooking = (req, res, next) => {
   });
 };
 exports.getFavouriteList = (req, res, next) => {
-  Favourite.find().then(favourite => {
-    favourite=favourite.map(fav=>fav.houseId.toString())
+  Favourite.find().then((favourite) => {
+    favourite=favourite.map((fav)=>fav.houseId.toString())
     Home.find().then(registeredHome=> {
       console.log(favourite,registeredHome)
       const favouriteHomes = registeredHome.filter(home =>
@@ -60,13 +61,19 @@ exports.getHomeDetails = (req, res, next) => {
 
 exports.postAddToFavourite = (req, res, next) => {
   const homeId=req.body.id
-  const fav=new Favourite(homeId);
-  fav.save().then(result=>{
-    console.log('Fav added: ', result)
+  Favourite.findOne({houseId:homeId}).then((fav)=>{
+    if(fav){
+      console.log("already marked as favourite")
+      res.redirect("/favourite");
+    }else{
+      fav=new Favourite({houseId:homeId});
+      fav.save().then((result)=>{
+        console.log("Fav added",result)
+      })
+    }
+    res.redirect("/favourite");
   }).catch(err=>{
     console.log("Error while marking favourites: ",err)
-  }).finally(()=>{
-    res.redirect("/favourite");
   })
   
 };
