@@ -1,5 +1,4 @@
 const Favourite = require("../models/favourite");
-const home = require("../models/home");
 const Home = require("../models/home");
 const { registeredHome } = require("./hostController");
 exports.getIndex = (req, res, next) => {
@@ -27,20 +26,16 @@ exports.getBooking = (req, res, next) => {
   });
 };
 exports.getFavouriteList = (req, res, next) => {
-  Favourite.find().then((favourite) => {
-    favourite=favourite.map((fav)=>fav.houseId.toString())
-    Home.find().then(registeredHome=> {
-      console.log(favourite,registeredHome)
-      const favouriteHomes = registeredHome.filter(home =>
-        favourite.includes(home._id.toString())
-      );
+  Favourite.find()
+  .populate('houseId')
+  .then((favourite) => {
+    const favouriteHomes=favourite.map((fav)=>fav.houseId)
       res.render("store/favourite-list", {
         favouriteHomes: favouriteHomes,
         pageTitle: "Favourite",
         currentPage: "favourite",
       });
     });
-  });
 };
 
 exports.getHomeDetails = (req, res, next) => {

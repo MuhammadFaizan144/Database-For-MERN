@@ -1,10 +1,10 @@
 const mongoose=require('mongoose')
-const favioruiteSchema=mongoose.Schema({
+const favouriteSchema=mongoose.Schema({
   houseId:{
     type:mongoose.Schema.Types.ObjectId,//dosre table ka dosre collection ka _id hai
-    ref:'Home',
+    ref:'home',
     required:true,
     unique:true
   }
 })
-module.exports=mongoose.model('Favourite',favioruiteSchema)//Favourite name ka ayk module bana de jiye or
+module.exports=mongoose.model('Favourite',favouriteSchema)//Favourite name ka ayk module bana de jiye or
