@@ -1,4 +1,4 @@
-exports.getAddHome = (req, res, next) => {
-  res.render("host/edit-home", { pageTitle: "Add Home", currentPage: "addhome", editing: false })
+exports.getLogin = (req, res, next) => {
+  res.render("auth/login", { pageTitle: "Login",currentPage: "login"})
 }
 

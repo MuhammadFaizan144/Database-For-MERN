@@ -21,7 +21,7 @@ app.use((req,res,next)=>{
 app.use(storeRouter)
 app.use("/host",hostRouter)
 app.use(get404.getError)
-app.use(authRouter)
+app.use("/host",authRouter)
 
 const POST=3000
 const DB_PATH="mongodb+srv://fg7829098:faizanfk0309@cluster01.erroaal.mongodb.net/?appName=Cluster01"

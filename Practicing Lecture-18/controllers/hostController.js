@@ -29,7 +29,7 @@ exports.getEditHome = (req, res, next) => {
   const editing = req.query.editing === 'true'
   Home.findById(homeId).then(home => {
     if (!home) {
-      console.log("Home does not found for editing")
+      console.log("Home does noSt found for editing")
       return res.redirect("/host/host-home-list")
     }
     console.log(homeId, editing, home)
