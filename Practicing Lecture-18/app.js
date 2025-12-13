@@ -4,7 +4,6 @@ const path=require('path')
 const rootDir=require('./utils/pathutils')
 const storeRouter=require("./routes/storeRouter")
 const {hostRouter}=require("./routes/hostRouter")
-const authRouter=require("./routes/authRouter")
 const get404=require("./controllers/error")
 // const { default: mongoose } = require('mongoose')
 const mongoose=require('mongoose')
@@ -21,7 +20,6 @@ app.use((req,res,next)=>{
 app.use(storeRouter)
 app.use("/host",hostRouter)
 app.use(get404.getError)
-app.use(authRouter)
 
 const POST=3000
 const DB_PATH="mongodb+srv://fg7829098:faizanfk0309@cluster01.erroaal.mongodb.net/?appName=Cluster01"
