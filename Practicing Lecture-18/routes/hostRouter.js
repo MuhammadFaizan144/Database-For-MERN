@@ -10,4 +10,4 @@ hostRouter.get("/host-home-list",hostController.getHostHomeList)
 hostRouter.get("/edit-home/:homeId",hostController.getEditHome)
 hostRouter.post("/edit-home",hostController.postEditHome)
 hostRouter.post("/delete-home/:homeId",hostController.postDeleteHome)
-exports.hostRouter=hostRouter
+module.exports=hostRouter
