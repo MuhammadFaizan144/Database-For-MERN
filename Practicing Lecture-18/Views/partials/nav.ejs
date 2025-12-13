@@ -8,41 +8,43 @@
         >Home</a
         >
       </li>
-      <li>
-        <a
-        href="/Homes"
-        class="<%= currentPage === 'Home' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
-        >Home-List</a
-        >
-      </li>
-      <li>
-        <a
-        href="/bookings"
-          class="<%= currentPage === 'bookings' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
-          >Bookings</a
-        >
-      </li>
-      <li>
-        <a
-        href="/favourite"
-        class="<%= currentPage === 'favourite' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
-        >Favourite</a
-        >
-      </li>
-      <li>
-        <a
-        href="/host/host-home-list"
-        class="<%= currentPage === 'hostHomeList' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
-        >Host Home List</a
-        >
-      </li>
-      <li>
-        <a
-        href="/host/add-home"
-        class="<%= currentPage === 'AddHome' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
-        >Add Home</a
-        >
-      </li>
+      <% if(isLoggedIn){%>
+        <li>
+          <a
+          href="/Homes"
+          class="<%= currentPage === 'Home' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
+          >Home-List</a
+          >
+        </li>
+        <li>
+          <a
+          href="/bookings"
+            class="<%= currentPage === 'bookings' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
+            >Bookings</a
+          >
+        </li>
+        <li>
+          <a
+          href="/favourite"
+          class="<%= currentPage === 'favourite' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
+          >Favourite</a
+          >
+        </li>
+        <li>
+          <a
+          href="/host/host-home-list"
+          class="<%= currentPage === 'hostHomeList' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
+          >Host Home List</a
+          >
+        </li>
+        <li>
+          <a
+          href="/host/add-home"
+          class="<%= currentPage === 'AddHome' ? 'bg-red-400' : 'hover:bg-red-400' %> hover:bg-red-400 py-2 px-4 rounded transition duration-300"
+          >Add Home</a
+          >
+        </li>
+        <% } %>
       <li>
         <a
         href="/Login"

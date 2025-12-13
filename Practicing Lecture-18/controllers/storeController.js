@@ -6,7 +6,7 @@ exports.getIndex = (req, res, next) => {
     res.render("store/index", {
       registeredHome: registeredHome,
       pageTitle: "Home",
-      currentPage: "home",
+      currentPage: "home",isLoggedIn:req.isLoggedIn
     });
   });
 };
@@ -15,14 +15,14 @@ exports.getHomeList = (req, res, next) => {
     res.render("store/home-list", {
       registeredHome: registeredHome,
       pageTitle: "Home List",
-      currentPage: "Home",
+      currentPage: "Home",isLoggedIn:req.isLoggedIn
     });
   });
 };
 exports.getBooking = (req, res, next) => {
   res.render("store/bookings", {
     pageTitle: "Booking",
-    currentPage: "bookings",
+    currentPage: "bookings",isLoggedIn:req.isLoggedIn
   });
 };
 exports.getFavouriteList = (req, res, next) => {
@@ -33,7 +33,7 @@ exports.getFavouriteList = (req, res, next) => {
       res.render("store/favourite-list", {
         favouriteHomes: favouriteHomes,
         pageTitle: "Favourite",
-        currentPage: "favourite",
+        currentPage: "favourite",isLoggedIn:req.isLoggedIn
       });
     });
 };
@@ -48,7 +48,7 @@ exports.getHomeDetails = (req, res, next) => {
       res.render("store/home-detail", {
         home: home,
         pageTitle: "Home Details",
-        currentPage: "home-details",
+        currentPage: "home-details",isLoggedIn:req.isLoggedIn
       });
     }
   });

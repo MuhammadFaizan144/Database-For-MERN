@@ -19,6 +19,13 @@ app.use((req,res,next)=>{
 })
 app.use(authRouter)
 app.use(storeRouter)
+app.use("/host",(req,res,next)=>{
+  if(req.isLoggedIn){
+    next()
+  }else{
+    res.redirect("/")
+  }
+})
 app.use("/host",hostRouter)
 app.use(get404.getError)
 
