@@ -1,4 +1,5 @@
 const express=require('express')
+const session=require('express-session')
 const app=express()
 const path=require('path')
 const rootDir=require('./utils/pathutils')
@@ -13,6 +14,13 @@ app.set("views","views")
 app.use(express.static(path.join(rootDir,"public")))
 
 app.use(express.urlencoded())
+
+app.use(session({
+  secret:"Hello Habibi",
+  resave:false,
+  saveUninitialized:true,
+}))
+
 app.use((req,res,next)=>{
   console.log("Cookie check middleware",req.get('Cookie'))
   req.isLoggedIn=req.get('Cookie')?req.get('Cookie').split('=')[1]==='true':'false'
