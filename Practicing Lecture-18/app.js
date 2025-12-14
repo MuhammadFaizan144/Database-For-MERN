@@ -1,5 +1,7 @@
 const express=require('express')
 const session=require('express-session')
+const MongoDBStore=require('connect-mongodb-session')(session);
+const DB_PATH="mongodb+srv://fg7829098:faizanfk0309@cluster01.erroaal.mongodb.net/?appName=Cluster01"
 const app=express()
 const path=require('path')
 const rootDir=require('./utils/pathutils')
@@ -13,17 +15,23 @@ app.set("view engine","ejs")
 app.set("views","views")
 app.use(express.static(path.join(rootDir,"public")))
 
+const store=new MongoDBStore({
+  url:DB_PATH,
+  collection:'sessions'
+})
+
 app.use(express.urlencoded())
 
 app.use(session({
   secret:"Hello Habibi",
   resave:false,
   saveUninitialized:true,
+  store:store,
 }))
 
 app.use((req,res,next)=>{
   console.log("Cookie check middleware",req.get('Cookie'))
-  req.isLoggedIn=req.get('Cookie')?req.get('Cookie').split('=')[1]==='true':'false'
+  req.isLoggedIn=req.session.isLoggedIn
   next()
 })
 
@@ -42,7 +50,6 @@ app.use("/host",hostRouter)
 app.use(get404.getError)
 
 const POST=3000
-const DB_PATH="mongodb+srv://fg7829098:faizanfk0309@cluster01.erroaal.mongodb.net/?appName=Cluster01"
 mongoose.connect(DB_PATH).then(()=>{
   console.log('Connected to Mongo')
   app.listen(POST,()=>{
