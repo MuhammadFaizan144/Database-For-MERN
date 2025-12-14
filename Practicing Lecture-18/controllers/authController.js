@@ -3,15 +3,16 @@ exports.getLogin=(req,res,next)=>{
 
 }
 exports.postLogin=(req,res,next)=>{
-    console.log(req.body)
+    // console.log(req.body)
     req.session.isLoggedIn=true
     // res.session("isLoggedIn",true)
     // res.isLoggedIn=true
     res.redirect("/")
 }
 exports.postLogout=(req,res,next)=>{
-    console.log(req.body)
-    res.cookie("isLoggedIn",false)
-    // res.isLoggedIn=true
-    res.redirect("/login")
+    // console.log(req.body)
+    req.session.destroy(()=>{
+        res.redirect("/login")
+
+    })
 }
